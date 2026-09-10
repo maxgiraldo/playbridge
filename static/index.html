@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bridge</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="bar">
+    <div class="brand"><span>\u2660</span> Bridge</div>
+    <div class="bar-stats">
+      <div>Deal <b id="deal">1</b></div>
+      <div>Score <b id="score">0</b></div>
+      <div id="contract-line">\u2014</div>
+    </div>
+    <button type="button" id="new-deal">New deal</button>
+  </header>
+
+  <section class="bots">
+    <label>Rules
+      <select id="cfg-rules">
+        <option value="bridge">Contract</option>
+        <option value="minibridge">MiniBridge</option>
+      </select>
+    </label>
+    <label>Partner
+      <select id="cfg-partner">
+        <option value="engine">Engine</option>
+        <option value="llm">LLM</option>
+      </select>
+    </label>
+    <label>Opponents
+      <select id="cfg-opponents">
+        <option value="engine">Engine</option>
+        <option value="llm">LLM</option>
+      </select>
+    </label>
+    <label>Model <input id="cfg-model" value="gpt-4.1-mini" /></label>
+    <label>Base URL <input id="cfg-url" value="https://api.openai.com/v1" /></label>
+    <label>API key <input id="cfg-key" type="password" placeholder="optional if the agent posts moves" /></label>
+    <button type="button" id="cfg-apply">Apply bots</button>
+  </section>
+
+  <p class="rules" id="rules-line">
+    Auction: <b>1H</b> <b>1NT</b> <b>P</b> <b>X</b>
+    \u00b7 play: <b>NAs</b> <b>W3s</b>
+    \u00b7 dummy face-up after the opening lead
+  </p>
+
+  <div class="playfield">
+  <main class="table">
+    <aside class="chip deal-chip">Deal<br><b id="deal-chip">1</b></aside>
+    <aside class="chip score-chip">Score<br><b id="score-chip">0</b></aside>
+
+    <section class="seat seat-n">
+      <div class="seat-label" id="label-n">N Partner</div>
+      <div class="hand" id="hand-n"></div>
+    </section>
+    <section class="seat seat-s">
+      <div class="hand" id="hand-s"></div>
+      <div class="seat-label" id="label-s">S You</div>
+    </section>
+    <section class="seat seat-w">
+      <div class="seat-label" id="label-w">W Robot</div>
+      <div class="hand vertical" id="hand-w"></div>
+    </section>
+    <section class="seat seat-e">
+      <div class="seat-label" id="label-e">E Robot</div>
+      <div class="hand vertical" id="hand-e"></div>
+    </section>
+
+    <div class="status" id="status" hidden></div>
+    <div class="trick" id="trick"></div>
+    <div class="overlay" id="overlay" hidden></div>
+  </main>
+  <aside class="scoresheet" aria-label="Scoresheet">
+    <header>
+      <span>Score</span>
+      <span class="legend">N1S EP \u00b7 NAs W3s</span>
+    </header>
+    <pre id="scoresheet">\u2026</pre>
+  </aside>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
